@@ -1,0 +1,34 @@
+/*-- Colors -- */
+$base-black: black;
+$base-white: white;
+$gainsboro: #DBDFE2;
+$transparent: rgba(0,0,0,0);
+/*-- Typeography --*/
+    /*-- Fonts --*/
+    $font-family: 'Helvetica Neue', sans-serif;
+    /*-- Sizing --*/
+    $xs-font-size: 14px;
+    $sm-font-size: 20px;
+    $lg-font-size: 40px;
+    /*-- Alternate Colors --*/
+    $disabled-base-black: $gainsboro;
+/*-- Borders --*/
+    /*-- Color --*/
+    /*-- Radius --*/
+/*-- Spacing --*/
+    /*-- Padding --*/
+    $xs-padding: 3px;
+    $sm-padding: 5px;
+    /*-- Margin --*/
+    $xs-margin: 3px;
+    $sm-margin: 5px;
+    $md-margin: 7px;
+    $lg-margin: 10px;
+/*-- Animation --*/
+$compactTransition: all ease 0.3s;
+$easeInTransition: easeInTransition(0.3s);
+$slowEaseInTransition: easeInTransition(0.5s);
+
+@function easeInTransition($seconds) {
+    @return ease-in $seconds;
+}
