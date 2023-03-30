@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+      "outDir": "./dist-scripts/",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "declaration": true,
+      "removeComments": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "target": "es2021",
+      "sourceMap": true,
+      "incremental": true,
+      "lib": [
+        "ES2021"
+      ],
+      "baseUrl": "./",
+  },
+  "include": [
+      "./scripts/*",
+  ],
+}
