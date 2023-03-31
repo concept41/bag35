@@ -1,13 +1,13 @@
-import fetch from 'node-fetch';
-import { FIDELITY_CONFIG, SCRAPE_CONFIG } from './13F/13F.config';
+import { FIDELITY_CONFIG, SCRAPE_CONFIG } from '../13F/13F.config';
 import { ScrapeCUSIPWriteLocation } from './ScrapeCUSIP';
-import { FSClient } from './utils/FSClient';
-import { sleep } from './utils/sleep';
+import { curlAndExtract } from './curlAndExtract';
+import { FSClient } from './FSClient';
+import { sleep } from './sleep';
 
-const IdentifyCUSIPWriteLocation = `${SCRAPE_CONFIG.SCRAPED_WRITE_LOCATION}/IDENTIFIED_CUSIP_${SCRAPE_CONFIG.SUMMARIES['2022Q4']}.tsv`;
+const IdentifyCUSIPWriteLocation = `${SCRAPE_CONFIG.SCRAPED_WRITE_LOCATION}/IDENTIFIED_CUSIP.tsv`;
 
-export const IdentifyCUSIP = async () => {
-  let CUSIPs = FSClient.readFile(ScrapeCUSIPWriteLocation).split('\n');
+export const IdentifyCUSIP = async (quarter: string) => {
+  let CUSIPs = FSClient.readFile(ScrapeCUSIPWriteLocation(quarter)).split('\n');
 
   // Check if identification process has started
   if (FSClient.exists(IdentifyCUSIPWriteLocation)) {
@@ -28,20 +28,13 @@ export const IdentifyCUSIP = async () => {
 
   
   const generateQueryFromCUSIP = (CUSIP: string) => `https://quotes.fidelity.com/mmnet/SymLookup.phtml?reqforlookup=REQUESTFORLOOKUP&productid=mmnet&isLoggedIn=mmnet&rows=50&for=stock&by=cusip&criteria=${CUSIP}&submit=Search`;
-  const queryDelay = FIDELITY_CONFIG.THROTTLE
-  const extractTickerFromResponseText = (responseText: string) => {
-    const match = responseText.match(/SID_VALUE_ID=\w+/g);
-    if (!match) {
-      return 'NO MATCH';
-    }
-    
-    return match[0].split('=')[1];
-  }
+  const queryDelay = FIDELITY_CONFIG.THROTTLE;
+  const regex = "SID_VALUE_ID=\\w+";
+  const additonalProcessing = (match: string) => match.split('=')[1];
+
   const handleCUSIP = async (CUSIP: string) => {
     console.log(`looking up ticker for CUSIP [${CUSIP}]`);
-    const queryString = generateQueryFromCUSIP(CUSIP);
-    const responseText = await fetch(queryString).then(resp => resp.text());
-    const ticker = extractTickerFromResponseText(responseText);
+    const ticker = await curlAndExtract(generateQueryFromCUSIP, CUSIP, regex, additonalProcessing);
     console.log(`ticker, [${ticker}] found for CUSIP [${CUSIP}]`);
     FSClient.appendFile(IdentifyCUSIPWriteLocation, `${CUSIP}\t${ticker}\n`);
     console.log('appended ticker to file');
@@ -53,5 +46,3 @@ export const IdentifyCUSIP = async () => {
     await handleCUSIP(CUSIPs[i]);
   }
 }
-
-IdentifyCUSIP();

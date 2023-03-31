@@ -29,10 +29,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "scripts:compile": "tsc -p tsconfig.scripts.json",
-    "scripts:edgar:13f": "yarn scripts:compile && node --experimental-modules ./dist-scripts/EDGAR/EDGAR13f.js",
-    "scripts:scrape:CIK": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ScrapeCIK.js",
-    "scripts:scrape:CUSIP": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ScrapeCUSIP.js",
-    "scripts:scrape:CUSIP:identify": "yarn scripts:compile && node --experimental-modules ./dist-scripts/IdentifyCUSIP.js"
+    "scripts:progress:scraped:CIK": "yarn scripts:compile && node --experimental-modules ./dist-scripts/getCIKProgress.js",
+    "scripts:progress:scraped:CUSIP": "yarn scripts:compile && node --experimental-modules ./dist-scripts/getCUSIPProgress.js",
+    "scripts:scrape": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ScrapeAll.js"
   },
   "eslintConfig": {
     "extends": "react-app"

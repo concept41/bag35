@@ -3,13 +3,21 @@ import path from 'path';
 export const SCRAPE_CONFIG = {
   QUARTERLY_SUMMARY_LOCATION: path.resolve(__dirname, '../../downloads'),
   SCRAPED_WRITE_LOCATION: path.resolve(__dirname, '../../scraped'),
-  SUMMARIES: {
-    ['2022Q4']: '2022q4_form13f',
-  },
+  QUARTERLY_SUMMARY_NAME_FORMAT: /\d{4}q\d_form13f/g,
+  DEFAULT_QUARTER: '2022Q4',
+}
+
+export enum SCRAPE_TYPES {
+  CIK= 'CIK',
+  CUSIP= 'CUSIP',
 }
 
 export const FIDELITY_CONFIG = {
   THROTTLE: 100,
+}
+
+export const EDGARCOMPANY_CONFIG = {
+  THROTTLE: 100, // listed fastest access rate
 }
 
 export const QUARTERLY_SUMMARY_FILE_NAMES = {
