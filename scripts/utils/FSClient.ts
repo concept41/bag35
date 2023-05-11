@@ -50,7 +50,7 @@ export class FSClient {
     return existsSync(path);
   }
 
-  public static readSVIntoJson(path: string, separator: string) {
+  public static readSVIntoJson(path: string, separator: string): Record<string, string>[] {
     const file = FSClient.readFile(path).split('\n');
     const headers = (file.shift() || 'no headers').split(separator);
 

@@ -1,7 +1,7 @@
-import { SCRAPE_TYPES } from "./13F/13F.config"
-import { getUnscrapedQuarters } from "./utils/getUnscrapedQuarters"
-import { ScrapeCIK } from "./utils/ScrapeCIK";
-import { ScrapeCUSIP } from "./utils/ScrapeCUSIP";
+import { SCRAPE_TYPES } from "../13F/13F.config"
+import { getUnscrapedQuarters } from "./getUnscrapedQuarters"
+import { ScrapeCIK } from "./ScrapeCIK";
+import { ScrapeCUSIP } from "./ScrapeCUSIP";
 
 export const ScrapeAll = async (scrapeType: SCRAPE_TYPES) => {
   console.log(`running ScrapeAll(${scrapeType})`);
@@ -21,12 +21,5 @@ export const ScrapeAll = async (scrapeType: SCRAPE_TYPES) => {
     }
   }
 
-  console.log(`ScrapeAll complete!`);
+  console.log(`ScrapeAll(${scrapeType}) complete!`);
 }
-
-const run = async () => {
-  await ScrapeAll(SCRAPE_TYPES.CIK);
-  await ScrapeAll(SCRAPE_TYPES.CUSIP);
-}
-
-run();

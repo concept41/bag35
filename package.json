@@ -14,8 +14,10 @@
     "@types/react-router-dom": "5.1.3",
     "@types/request": "^2.48.8",
     "classnames": "^2.3.1",
+    "dotenv": "^16.0.3",
     "echarts": "^5.4.0",
     "echarts-for-react": "^3.0.2",
+    "neo4j-driver": "^5.7.0",
     "node-fetch": "2.6.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -31,7 +33,12 @@
     "scripts:compile": "tsc -p tsconfig.scripts.json",
     "scripts:progress:scraped:CIK": "yarn scripts:compile && node --experimental-modules ./dist-scripts/getCIKProgress.js",
     "scripts:progress:scraped:CUSIP": "yarn scripts:compile && node --experimental-modules ./dist-scripts/getCUSIPProgress.js",
-    "scripts:scrape": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ScrapeAll.js"
+    "scripts:scrape": "yarn scripts:compile && node --experimental-modules ./dist-scripts/runScrapeAll.js",
+    "scripts:identify": "yarn scripts:compile && node --experimental-modules ./dist-scripts/runIdentifyAll.js",
+    "scripts:metrics:matched:CUSIP": "yarn scripts:compile && node --experimental-modules ./dist-scripts/getMatchedCUSIP.js",
+    "scripts:ingest:entities": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ingestEntities.js",
+    "scripts:ingest:equities": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ingestEquities.js",
+    "scripts:ingest:submissions": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ingestSubmissions.js"
   },
   "eslintConfig": {
     "extends": "react-app"

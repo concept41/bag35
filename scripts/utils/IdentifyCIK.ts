@@ -4,7 +4,7 @@ import { curlAndExtract } from './curlAndExtract';
 import { FSClient } from './FSClient';
 import { sleep } from './sleep';
 
-const IdentifyCIKWriteLocation = `${SCRAPE_CONFIG.SCRAPED_WRITE_LOCATION}/IDENTIFIED_CIK.tsv`;
+export const IdentifyCIKWriteLocation = `${SCRAPE_CONFIG.SCRAPED_WRITE_LOCATION}/IDENTIFIED_CIK.tsv`;
 
 export const IdentifyCIK = async (quarter: string) => {
   let CIKs = FSClient.readFile(ScrapeCIKWriteLocation(quarter)).split('\n');

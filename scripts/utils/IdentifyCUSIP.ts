@@ -4,7 +4,7 @@ import { curlAndExtract } from './curlAndExtract';
 import { FSClient } from './FSClient';
 import { sleep } from './sleep';
 
-const IdentifyCUSIPWriteLocation = `${SCRAPE_CONFIG.SCRAPED_WRITE_LOCATION}/IDENTIFIED_CUSIP.tsv`;
+export const IdentifyCUSIPWriteLocation = `${SCRAPE_CONFIG.SCRAPED_WRITE_LOCATION}/IDENTIFIED_CUSIP.tsv`;
 
 export const IdentifyCUSIP = async (quarter: string) => {
   let CUSIPs = FSClient.readFile(ScrapeCUSIPWriteLocation(quarter)).split('\n');
