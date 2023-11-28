@@ -2,6 +2,16 @@ import { SCRAPE_TYPES } from "./13F/13F.config";
 import { getQuarterlyDownloads } from "./utils/getQuarterlyDownloads";
 import { getScrapedQuarters } from "./utils/getScrapedQuarters";
 
+/**
+ * for CUSIP, Logs the number of quarters processed, number of quarters with available data, and the quarters that have been completed
+ * 
+ * @example
+ * through package.json:
+ * ```shell
+ * yarn run scripts:progress:scraped:CUSIP
+ * ```
+ * 
+ */
 export const getCUSIPProgress = () => {
   const listOfAllDownloads = getQuarterlyDownloads().map((downloadFolderName) => downloadFolderName.split('_')[0]);
   const listOfAllCompletedQuarters = getScrapedQuarters(SCRAPE_TYPES.CUSIP);

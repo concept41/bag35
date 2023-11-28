@@ -2,9 +2,19 @@ import { Neo4jClient } from "./neo4j/Neo4jClient";
 import { DEFAULT_NO_MATCH_VAL } from "./utils/curlAndExtract";
 import { FSClient } from "./utils/FSClient";
 import { IdentifyCUSIPWriteLocation } from "./utils/IdentifyCUSIP";
-import { measureTime } from './utils/measureTime';
+import { time } from './utils/time';
 
 
+/**
+ * ingests equities into neo4j nodes.
+ * equities are securities with a CUSIP identifier and a ticker
+ * 
+ * @example
+ * through package.json:
+ * ```shell
+ * yarn run scripts:ingest:equities
+ * ```
+ */
 export const ingestEquities = async () => {
   console.log('running ingestEquities()');
   console.log('creating Neo4j Client');
@@ -24,9 +34,9 @@ export const ingestEquities = async () => {
     .map(([CUSIP, Ticker]) => CUSIPQuery(CUSIP, Ticker));
   
   console.log('running queries');
-  const startTime = measureTime();
+  const startTime = time();
   await Promise.all(CUSIPQueries.map((query) => client.write(...query)));
-  const endTime = measureTime();
+  const endTime = time();
   console.log(`queries finished in ${endTime - startTime}ms`);
 
   await client.close();

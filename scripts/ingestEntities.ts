@@ -1,9 +1,18 @@
 import { Neo4jClient } from "./neo4j/Neo4jClient";
 import { FSClient } from "./utils/FSClient";
 import { IdentifyCIKWriteLocation } from "./utils/IdentifyCIK";
-import { measureTime } from './utils/measureTime';
+import { time } from './utils/time';
 
-
+/**
+ * ingests filers into neo4j nodes.
+ * filers are financial entities with a CIK identifier
+ * 
+ * @example
+ * through package.json:
+ * ```shell
+ * yarn run scripts:ingest:entities
+ * ```
+ */
 export const ingestEntities = async () => {
   console.log('running ingestEntities()');
   console.log('creating Neo4j Client');
@@ -25,9 +34,9 @@ export const ingestEntities = async () => {
     });
   
   console.log('running queries');
-  const startTime = measureTime();
+  const startTime = time();
   await Promise.all(CIKQueries.map((query) => client.write(...query)));
-  const endTime = measureTime();
+  const endTime = time();
   console.log(`queries finished in ${endTime - startTime}ms`);
 
   await client.close();

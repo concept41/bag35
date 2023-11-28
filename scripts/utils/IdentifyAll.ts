@@ -4,6 +4,11 @@ import { IdentifyCIK } from "./IdentifyCIK";
 import { IdentifyCUSIP } from "./IdentifyCUSIP";
 
 
+/**
+ * runs IdentifyCIK or Identify CUSIP on scraped quarterly filings
+ * 
+ * @param scrapeType 
+ */
 export const IdentifyAll = async (scrapeType: SCRAPE_TYPES) => {
   console.log(`running IdentifyAll(${scrapeType})`);
   // get all scraped items

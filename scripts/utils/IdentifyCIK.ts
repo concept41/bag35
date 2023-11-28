@@ -6,6 +6,11 @@ import { sleep } from './sleep';
 
 export const IdentifyCIKWriteLocation = `${SCRAPE_CONFIG.SCRAPED_WRITE_LOCATION}/IDENTIFIED_CIK.tsv`;
 
+/**
+ * identifies CIKs for a given quarter
+ * 
+ * @param quarter 
+ */
 export const IdentifyCIK = async (quarter: string) => {
   let CIKs = FSClient.readFile(ScrapeCIKWriteLocation(quarter)).split('\n');
 

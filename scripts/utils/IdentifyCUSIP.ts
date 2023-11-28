@@ -6,6 +6,11 @@ import { sleep } from './sleep';
 
 export const IdentifyCUSIPWriteLocation = `${SCRAPE_CONFIG.SCRAPED_WRITE_LOCATION}/IDENTIFIED_CUSIP.tsv`;
 
+/**
+ * identifies CUSIPs for a given quarter
+ * 
+ * @param quarter 
+ */
 export const IdentifyCUSIP = async (quarter: string) => {
   let CUSIPs = FSClient.readFile(ScrapeCUSIPWriteLocation(quarter)).split('\n');
 

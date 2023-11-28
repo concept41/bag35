@@ -4,6 +4,11 @@ import { FSClient } from './FSClient';
 
 export const ScrapeCUSIPWriteLocation = (quarter: string) => `${SCRAPE_CONFIG.SCRAPED_WRITE_LOCATION}/RAW_CUSIP_${quarter}_form13f.tsv`;
 
+/**
+ * scrapes CUSIPs from a given quarter
+ * 
+ * @param quarter 
+ */
 export const ScrapeCUSIP = (quarter: string) => {
   const writeLocation = ScrapeCUSIPWriteLocation(quarter);
   console.log('running ScrapeCUSIP()');

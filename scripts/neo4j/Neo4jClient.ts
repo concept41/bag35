@@ -50,6 +50,14 @@ export class Neo4jClient {
   //     database: { name: 'neo4j' }
   //   }
   // }
+
+  /**
+   * writes query to neo4j
+   * 
+   * @param query
+   * @param params 
+   * @returns 
+   */
   async write(query: string, params?: Record<string, unknown>): Promise<any> {
     let session;
     try {
@@ -63,6 +71,12 @@ export class Neo4jClient {
     }
   }
 
+  /**
+   * executes read query from neo4j and returns results
+   * 
+   * @param query 
+   * @returns 
+   */
   async read(query: string): Promise<any> {
     let session;
     try {
@@ -76,10 +90,16 @@ export class Neo4jClient {
     }
   }
 
+  /**
+   * closes driver for neo4j client
+   */
   async close(): Promise<void> {
     await this.driver.close();
   }
 
+  /**
+   * deletes all nodes in neo4j
+   */
   async deleteAllNodes(): Promise<void> {
     await this.write( 'MATCH (n) DETACH DELETE n;');
   }

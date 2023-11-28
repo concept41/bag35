@@ -23,6 +23,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "5.1.2",
     "react-scripts": "3.4.1",
+    "typedoc": "^0.25.3",
     "typescript": "^4.9.1-beta"
   },
   "scripts": {
@@ -38,7 +39,9 @@
     "scripts:metrics:matched:CUSIP": "yarn scripts:compile && node --experimental-modules ./dist-scripts/getMatchedCUSIP.js",
     "scripts:ingest:entities": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ingestEntities.js",
     "scripts:ingest:equities": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ingestEquities.js",
-    "scripts:ingest:submissions": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ingestSubmissions.js"
+    "scripts:ingest:submissions": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ingestSubmissions.js",
+    "docs:generate": "typedoc --tsconfig tsconfig.scripts.json --entryPointStrategy expand ./scripts",
+    "docs:open": "open docs/index.html"
   },
   "eslintConfig": {
     "extends": "react-app"

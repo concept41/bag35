@@ -3,6 +3,11 @@ import { getUnscrapedQuarters } from "./getUnscrapedQuarters"
 import { ScrapeCIK } from "./ScrapeCIK";
 import { ScrapeCUSIP } from "./ScrapeCUSIP";
 
+/**
+ * calls ScrapeCIK or ScrapeCUSIP for all unscraped quarters
+ * 
+ * @param scrapeType 
+ */
 export const ScrapeAll = async (scrapeType: SCRAPE_TYPES) => {
   console.log(`running ScrapeAll(${scrapeType})`);
   // get unscraped quarters

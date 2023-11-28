@@ -3,6 +3,11 @@ import { FSClient } from './FSClient';
 
 export const ScrapeCIKWriteLocation = (quarter: string) => `${SCRAPE_CONFIG.SCRAPED_WRITE_LOCATION}/RAW_CIK_${quarter}_form13f.tsv`;
 
+/**
+ * scrapes CIKs from a given quarter
+ * 
+ * @param quarter 
+ */
 export async function ScrapeCIK(quarter: string) {
   const writeLocation = ScrapeCIKWriteLocation(quarter);
   console.log('running ScrapeCIK()');

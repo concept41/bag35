@@ -4,9 +4,16 @@ import { FSClient } from "./utils/FSClient";
 import { getQuarterlyDownloads } from "./utils/getQuarterlyDownloads";
 
 
-// query writer
-// include quarter of filing
-// ingest quarters
+/**
+ * ingests submissions into neo4j nodes.
+ * submissions are quarterly, and associated with a filer. it has a unique ACCESSION_NUMBER, and a particular quarter that it is filed for
+ * 
+ * @example
+ * through package.json:
+ * ```shell
+ * yarn run scripts:ingest:submissions
+ * ```
+ */
 export const ingestSubmissions = async () => {
   // get all quarterly folders and convert to a map of quarter to submission file path
   const submissionFilePathFromFolderName = (folderName: string) => `${SCRAPE_CONFIG.QUARTERLY_SUMMARY_LOCATION}/${folderName}/${QUARTERLY_SUMMARY_FILE_NAMES.SUBMISSION}`;
@@ -63,7 +70,7 @@ const ingestSubmission = async (year: number, quarter: number, path: string) => 
     .map((submission) => {
       const query = `
         MATCH (filer:FILER) WHERE filer.CIK = $CIK
-        MERGE (filer)-[:FILES]->(submission:SUBMISSION {ACESSION_NUMBER: $ACCESSION_NUMBER})
+        MERGE (filer)-[:FILES]->(submission:SUBMISSION {ACCESSION_NUMBER: $ACCESSION_NUMBER})
         SET submission.FILING_DATE = $FILING_DATE,
             submission.SUBMISSIONTYPE = $SUBMISSIONTYPE,
             submission.CIK = $CIK,
