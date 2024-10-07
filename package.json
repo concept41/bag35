@@ -40,6 +40,8 @@
     "scripts:ingest:entities": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ingestEntities.js",
     "scripts:ingest:equities": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ingestEquities.js",
     "scripts:ingest:submissions": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ingestSubmissions.js",
+    "scripts:ingest:holdings": "yarn scripts:compile && node --experimental-modules ./dist-scripts/ingestHoldings.js",
+    "scripts:graph:enrich:clearAndMarkLatestAmendments": "yarn scripts:compile && node --experimental-modules ./dist-scripts/clearAndMarkLatestAmendments.js",
     "docs:generate": "typedoc --tsconfig tsconfig.scripts.json --entryPointStrategy expand ./scripts",
     "docs:open": "open docs/index.html"
   },
